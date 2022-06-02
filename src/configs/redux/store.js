@@ -3,6 +3,7 @@ import {createStore} from 'redux'
 const initialState={
     email: 'risano@gmail.com',
     count: 0,
+    todo: []
 }
 const rootReducer = (state = initialState, action)=>{
     if(action.type === 'INCREMENT'){

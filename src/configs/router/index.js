@@ -7,6 +7,7 @@ import Home from '../../pages/Home'
 import Page404 from '../../pages/Page404'
 import Product from '../../pages/Product'
 import ProductList from '../../pages/ProductList'
+import Todo from '../../pages/Todo'
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
       <Route path="/product/:id" element={<DetailProduct/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/counter" element={<Counter/>}/>
+      <Route path="/todo" element={<Todo/>}/>
       <Route path="*" element={<Page404/>} />
     </Routes>
   </BrowserRouter>
