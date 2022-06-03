@@ -1,33 +1,8 @@
-import {createStore} from 'redux'
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./reducer/rootReducer";
+import loger from "redux-logger";
+import thunk from "redux-thunk";
 
-const initialState={
-    email: 'risano@gmail.com',
-    count: 0,
-    todo: []
-}
-const rootReducer = (state = initialState, action)=>{
-    if(action.type === 'INCREMENT'){
-        return {
-            ...state,
-            count : state.count + 1
-        }
-    }else if(action.type === 'DECREMENT'){
-        return {
-            ...state,
-            count: state.count - 1
-        }
-    }else if(action.type === 'CHANGE_EMAIL'){
-        return{
-            ...state,
-            email: action.payload
-        }
-    }
-    else{
-        return state
-    }
-}
+const store = createStore(rootReducer, applyMiddleware(thunk, loger));
 
-
-const store =  createStore(rootReducer)
-
-export default store
+export default store;
