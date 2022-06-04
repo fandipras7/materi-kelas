@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../configs/redux/action/userAction";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.user);
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
@@ -15,6 +21,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    dispatch(loginUser(formLogin, navigate));
   };
   return (
     <div>
@@ -26,7 +33,7 @@ const Login = () => {
           <li>
             <input type="password" name="password" id="password" value={formLogin.password} onChange={handleChange} />
           </li>
-          <button>Login</button>
+          <button>{isLoading ? "Loading..." : "Login"}</button>
         </ul>
       </form>
     </div>

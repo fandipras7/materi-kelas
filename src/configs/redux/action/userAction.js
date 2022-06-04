@@ -1,8 +1,15 @@
 import axios from "axios";
-export const loginUser = (data) => async (dispatch) => {
+export const loginUser = (dataForm, navigate) => async (dispatch) => {
   try {
-    const result = axios.post("http://localhost:4000/v1/users/login", data);
-    console.log(result);
-    dispatch({ type: "USER_LOGIN_SUCCESS", payload: {} });
-  } catch (error) {}
+    dispatch({ type: "USER_LOGIN_PENDING" });
+    const result = await axios.post("http://localhost:4000/v1/users/login", dataForm);
+    const user = result.data.data;
+    localStorage.setItem("token", user.token);
+    localStorage.setItem("refreshToken", user.refreshToken);
+    // localStorage.setItem("others", user.name);
+    dispatch({ type: "USER_LOGIN_SUCCESS", payload: { user } });
+    navigate("/home");
+  } catch (error) {
+    console.log(error);
+  }
 };
